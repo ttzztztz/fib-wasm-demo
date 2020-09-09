@@ -1,0 +1,11 @@
+{
+  "name": "fib-wasm",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/ttzztztz/fib-wasm-demo.git",
+  "author": "ttzztztz <ttzztztz@outlook.com>",
+  "license": "MIT",
+  "scripts": {
+    "start": "node ./js/main.js"
+  }
+}

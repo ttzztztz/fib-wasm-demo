@@ -3,6 +3,12 @@ extern crate wasm_bindgen;
 use wasm_bindgen::prelude::*;
 
 #[wasm_bindgen]
+extern "C" {
+    #[wasm_bindgen(js_namespace = console)]
+    fn log(s: &str);
+}
+
+#[wasm_bindgen]
 pub fn fib(n: i32) -> i32 {
     let _mod: i64 = 1_000_000_007;
 
@@ -15,5 +21,7 @@ pub fn fib(n: i32) -> i32 {
         num2 = cur;
     }
 
-    return ((num1 + num2) % _mod) as i32;
+    let answer: i32 = ((num1 + num2) % _mod) as i32;
+    log("wasm ok!!!");
+    return answer;
 }

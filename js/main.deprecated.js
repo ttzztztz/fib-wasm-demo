@@ -1,3 +1,6 @@
+/**
+ * @deprecated
+ */
 const fib = (n) => {
     const mod = (1e9+7) | 0;
     let [x, y] = [1, 1];
