@@ -6,6 +6,7 @@
   "author": "ttzztztz <ttzztztz@outlook.com>",
   "license": "MIT",
   "scripts": {
-    "start": "node ./js/main.js"
+    "start": "node ./js/main.js",
+    "build": "wasm-pack build --target nodejs"
   }
 }
