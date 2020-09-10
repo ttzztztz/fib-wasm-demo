@@ -9,6 +9,17 @@ extern "C" {
 }
 
 #[wasm_bindgen]
+pub fn dom_operation() {
+    let window = web_sys::window().unwrap();
+    let document = window.document().unwrap();
+
+    let container_dom = document.get_element_by_id("container").unwrap();
+    container_dom.set_inner_html("hello, world!");
+
+    log("dom opeation ok!!!");
+}
+
+#[wasm_bindgen]
 pub fn fib(n: i32) -> i32 {
     let _mod: i64 = 1_000_000_007;
 
