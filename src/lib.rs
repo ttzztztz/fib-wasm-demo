@@ -19,13 +19,13 @@ extern "C" {
 }
 
 #[wasm_bindgen]
-pub async fn get_github_info() -> Result<JsValue, JsValue> {
+pub async fn get_github_info(username: String) -> Result<JsValue, JsValue> {
     let mut opts = RequestInit::new();
     opts.method("GET");
     opts.mode(RequestMode::Cors);
 
     let url = format!("https://api.github.com/users/{username}/following?per_page={per_page}&page={page}",
-        username = "ttzztztz",
+        username = username,
         per_page = 100,
         page = 1);
 
@@ -34,11 +34,13 @@ pub async fn get_github_info() -> Result<JsValue, JsValue> {
     request.headers().set("User-Agent", "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4147.125 Safari/537.36");
 
     let window = web_sys::window().unwrap();
-    let resp_val = JsFuture::from(window.fetch_with_request(&request)).await?;
+    let resp_promise = JsFuture::from(window.fetch_with_request(&request)).await?;
 
+    assert!(resp_promise.is_instance_of::<Response>());
+    let resp: Response = resp_promise.dyn_into().unwrap();
     let json = JsFuture::from(resp.json()?).await?;
 
-    Ok(JsValue::from_serde(&res).unwrap())
+    Ok(json)
 }
 
 #[wasm_bindgen]

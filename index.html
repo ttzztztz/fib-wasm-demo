@@ -7,7 +7,7 @@
   </body>
 </html>
 <script type="module">
-  import init, { fib, dom_operation } from "./pkg/fib_wasm.js";
+  import init, { fib, dom_operation, get_github_info } from "./pkg/fib_wasm.js";
 
   (async () => {
     await init();
@@ -15,5 +15,8 @@
     console.log(answer);
 
     dom_operation();
+
+    const val = await get_github_info("ttzztztz");
+    console.log(val);
   })();
 </script>
