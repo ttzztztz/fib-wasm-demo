@@ -6,7 +6,12 @@
   "author": "ttzztztz <ttzztztz@outlook.com>",
   "license": "MIT",
   "scripts": {
-    "start": "node ./js/main.js",
-    "build": "wasm-pack build --target nodejs"
+    "start-node": "node ./js/main.js",
+    "build-node": "wasm-pack build --target nodejs",
+    "build-web": "wasm-pack build --target web",
+    "server": "node ./server.js"
+  },
+  "dependencies": {
+    "express": "^4.17.1"
   }
 }
