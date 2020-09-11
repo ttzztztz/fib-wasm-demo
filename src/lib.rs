@@ -4,7 +4,7 @@ use wasm_bindgen::prelude::*;
 use serde::{Deserialize, Serialize};
 use wasm_bindgen::JsCast;
 use wasm_bindgen_futures::JsFuture;
-use web_sys::{Request, RequestInit, RequestMode, Response};
+use web_sys::{Request, RequestInit, RequestMode, Response, Window};
 
 #[derive(Deserialize, Serialize, Clone)]
 struct GithubFollowerInfo {
@@ -30,10 +30,10 @@ pub async fn get_github_info(username: String) -> Result<JsValue, JsValue> {
         page = 1);
 
     let request = Request::new_with_str_and_init(&url, &opts)?;
-    request.headers().set("Accept", "application/vnd.github.v3+json");
-    request.headers().set("User-Agent", "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4147.125 Safari/537.36");
+    request.headers().set("Accept", "application/vnd.github.v3+json").unwrap();
+    request.headers().set("User-Agent", "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4147.125 Safari/537.36").unwrap();
 
-    let window = web_sys::window().unwrap();
+    let window: Window = web_sys::window().unwrap();
     let resp_promise = JsFuture::from(window.fetch_with_request(&request)).await?;
 
     assert!(resp_promise.is_instance_of::<Response>());
